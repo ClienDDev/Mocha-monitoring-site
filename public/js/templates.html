@@ -3,7 +3,10 @@
         <div class="panel panel-default test" data-name="{{name}}" >
             <div class="panel-heading name">
                 <b>{{name}}</b>
-                <span title="Общее время выполнения" class="pull-right runtime"></span>
+                <div class="pull-right">
+                    <span title="Общее время выполнения" class="runtime"></span> |
+                    <span title="Процент успешных тестов" class="percent"></span>
+                </div>
             </div>
             <div class="panel-body">
                 <div class="res">

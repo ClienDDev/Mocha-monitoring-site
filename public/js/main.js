@@ -69,8 +69,8 @@ function test_init(test){
 
     var div = $('.test[data-name="' + test + '"');
 
-    div.find('.runtime').html('<i class="fa fa-spin fa-spinner"></i>');
-    div.find('.fail, .pass').html('<i class="fa fa-spin fa-spinner fa-2x"></i>');
+    div.find('.runtime, .percent').html('<i class="fa fa-spin fa-spinner"></i>');
+    div.find('.res').html('<i class="fa fa-spin fa-spinner fa-2x"></i>');
     div.find('.refresh_test').attr('disabled', 'disabled');
 
     div.find('.refresh_test').unbind('click').click(function(){
@@ -92,6 +92,30 @@ function test_init(test){
 
         div.find('.runtime').text(json.stats.duration + 'ms');
         div.find('.res').html(test_items_template({ data: json.tests }));
+
+        var total = json.tests.length;
+        var error = json.failures.length;
+        var success_percent = total * 100 / (total + error);
+
+        if(typeof success_percent !== 'number' || isNaN(success_percent))
+            success_percent = 0;
+
+        success_percent = success_percent.toFixed(2);
+
+        div.find('.percent').text(success_percent + '%');
+
+        div
+            .removeClass('panel-success')
+            .removeClass('panel-warning')
+            .removeClass('panel-danger')
+            .removeClass('panel-default');
+
+        if(success_percent > 90)
+            div.addClass('panel-success');
+        else if(success_percent > 80)
+            div.addClass('panel-warning');
+        else
+            div.addClass('panel-danger');
 
         test_item_click();
         search_init();
