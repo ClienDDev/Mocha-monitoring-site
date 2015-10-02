@@ -27,8 +27,13 @@ function test_item_click(){
     });
 }
 
-function init(){
+function panel_click(){
+    $('.panel-heading').unbind('click').click(function(){
+        $(this).parent().find('.panel-body').slideToggle(100);
+    });
+}
 
+function init(){
     $.get('/js/templates.html', function(html){
         $('body').append(html);
 
@@ -62,9 +67,10 @@ function init(){
                     });
                 })(test);
             });
+
+            panel_click();
         });
     });
-
 }
 
 $(function(){

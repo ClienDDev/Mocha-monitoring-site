@@ -1,4 +1,4 @@
-.list-group-item{
+.list-group-item, .panel-heading{
     cursor: pointer;
 }
 
