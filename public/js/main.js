@@ -91,14 +91,7 @@ function test_init(test){
         }
 
         div.find('.runtime').text(json.stats.duration + 'ms');
-        div.find('.pass').html(test_items_template({
-            data: json.passes,
-            success: true
-        }));
-        div.find('.fail').html(test_items_template({
-            data: json.failures,
-            success: false
-        }));
+        div.find('.res').html(test_items_template({ data: json.tests }));
 
         test_item_click();
         search_init();
