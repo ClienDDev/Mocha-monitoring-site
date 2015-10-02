@@ -2,6 +2,12 @@
     cursor: pointer;
 }
 
+.all_status{
+    font-size:16.8px;
+    cursor: none;
+    text-align: center;
+}
+
 #search{
     margin-bottom:10px;
 }

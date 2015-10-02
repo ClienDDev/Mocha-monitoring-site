@@ -27,6 +27,33 @@ function test_item_click(){
     });
 }
 
+function update_status(){
+    var total = $('.test_item.list-group-item-success').length;
+    var error = $('.test_item.list-group-item-danger').length;
+    var success_percent = total * 100 / (total + error);
+
+    if(typeof success_percent !== 'number' || isNaN(success_percent))
+        success_percent = 0;
+
+    success_percent = success_percent.toFixed(2);
+
+    $('.all_status')
+        .removeClass('list-group-item-danger')
+        .removeClass('list-group-item-warning')
+        .removeClass('list-group-item-success');
+
+    if(success_percent > 90)
+        $('.all_status').addClass('list-group-item-success');
+    else{
+        if(success_percent > 80)
+            $('.all_status').addClass('list-group-item-warning');
+        else
+            $('.all_status').addClass('list-group-item-danger');
+    }
+
+    $('.all_status .percent').text(success_percent + '%');
+}
+
 
 function test_init(test){
     if($('.test[data-name="' + test + '"').length == 0)
@@ -67,6 +94,7 @@ function test_init(test){
 
         test_item_click();
         search_init();
+        update_status();
 
         console.log(json);
     });

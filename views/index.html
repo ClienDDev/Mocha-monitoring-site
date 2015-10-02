@@ -1,6 +1,21 @@
 {% extends "layout.html" %}
 {% block content %}
-    <input type="text" class="form-control input-lg" id="search" placeholder="Поиск">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <div class="list-group-item all_status">
+                    <b>
+                        Доступно
+                        <span class="percent"><i class="fa fa-spin fa-spinner"></i></span>
+                        сервисов
+                    </b>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <input type="text" class="form-control input-lg" id="search" placeholder="Поиск">
+        </div>
+    </div>
     <div class="tests">
         <i class="fa fa-spinner fa-spin fa-4x"></i>
     </div>
