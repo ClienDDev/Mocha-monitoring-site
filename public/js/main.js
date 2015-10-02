@@ -120,6 +120,7 @@ function test_init(test){
         test_item_click();
         search_init();
         update_status();
+        $(".tests").sortable();
 
         console.log(json);
     });

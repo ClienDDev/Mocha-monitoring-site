@@ -24,6 +24,7 @@
     "font-awesome": "~4.4.0",
     "handlebars": "~4.0.3",
     "bootbox.js": "bootbox#~4.4.0",
-    "jquery-fastlivefilter": "~1.0.3"
+    "jquery-fastlivefilter": "~1.0.3",
+    "jquery-ui": "~1.11.4"
   }
 }
