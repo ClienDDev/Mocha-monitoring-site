@@ -17,7 +17,12 @@ router.get('/tests', function(req, res){
 
         if(files && files.length > 0) {
             files.forEach(function (file) {
-                if (file != '..' && file != '.')
+                if (
+                    fs.lstatSync(global.config.tests_dir + '/' + file).isDirectory() === false &&
+                    path.extname(global.config.tests_dir + '/' + file) === '.js' &&
+                    file != '..' &&
+                    file != '.'
+                )
                     return_json.push(file.replace('.js', ''));
             });
         }
@@ -28,7 +33,7 @@ router.get('/tests', function(req, res){
 
 router.get('/tests/:name', function(req, res) {
     var test_name = req.params.name;
-    var test_path = path.normalize(global.config.tests_dir, test_name + '.js');
+    var test_path = path.join(global.config.tests_dir, '/' + test_name + '.js');
 
     if (!fs.existsSync(test_path))
         return res.status(404).json({error: 'file not found'});
