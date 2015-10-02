@@ -28,7 +28,7 @@ router.get('/tests', function(req, res){
 
 router.get('/tests/:name', function(req, res) {
     var test_name = req.params.name;
-    var test_path = path.normalize(global.config.tests_dir, test_name + '.js');
+    var test_path = path.join(global.config.tests_dir, '/' + test_name + '.js');
 
     if (!fs.existsSync(test_path))
         return res.status(404).json({error: 'file not found'});
