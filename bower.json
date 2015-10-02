@@ -22,6 +22,7 @@
     "jquery": "~2.1.4",
     "bootstrap": "~3.3.5",
     "font-awesome": "~4.4.0",
-    "handlebars": "~4.0.3"
+    "handlebars": "~4.0.3",
+    "bootbox.js": "bootbox#~4.4.0"
   }
 }

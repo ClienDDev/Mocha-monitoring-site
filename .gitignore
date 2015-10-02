@@ -2,3 +2,4 @@ node_modules
 tests
 .idea
 public/libs
+config.json
