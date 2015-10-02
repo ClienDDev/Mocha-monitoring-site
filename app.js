@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
+global.config = require('./config.json');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
@@ -66,7 +68,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '3005');
 app.set('port', port);
 
 /**
