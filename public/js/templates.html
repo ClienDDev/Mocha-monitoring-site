@@ -6,13 +6,13 @@
         <div class="panel-body">
             <div class="col-md-6">
                 <h3>Успешные</h3>
-                <div class="pass">
+                <div class="pass items_group">
                     <i class="fa fa-spin fa-spinner fa-2x"></i>
                 </div>
             </div>
             <div class="col-md-6">
                 <h3>Ошибки</h3>
-                <div class="fail">
+                <div class="fail items_group">
                     <i class="fa fa-spin fa-spinner fa-2x"></i>
                 </div>
             </div>
@@ -32,17 +32,62 @@
     <div class="list-group">
         {{#if data}}
             {{#each data}}
-                <div class="list-group-item {{#if ../success}} list-group-item-success {{else}} list-group-item-danger {{/if}}"
+                <div class="list-group-item test_item {{#if ../success}} list-group-item-success {{else}} list-group-item-danger {{/if}}"
                      {{#if err.message}}
-                        onclick="alert('{{err.message}}')"
+                        data-error="{{err.message}}"
+                        data-stack="{{err.stack}}"
                      {{/if}}
                 >
-                    {{fullTitle}}
-                    <span class="badge">{{duration}}ms</span>
+                    <span class="title">{{fullTitle}}</span>
+                    <span class="badge duration">{{duration}}ms</span>
                 </div>
             {{/each}}
         {{else}}
             <i>нет</i>
+        {{/if}}
+    </div>
+</script>
+
+
+<script id="item_dialog_template" type="text/x-handlebars-template">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Название</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control input_hover" value="{{title}}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Длительность</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">{{duration}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Выполнено</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">
+                    {{#if is_fail}}
+                        c ошибкой
+                    {{else}}
+                        без ошибок
+                    {{/if}}
+                </p>
+            </div>
+        </div>
+        {{#if is_fail}}
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Текст ошибки</label>
+                <div class="col-sm-9">
+                    <pre>{{error}}</pre>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Stack trace</label>
+                <div class="col-sm-9">
+                    <pre>{{stack}}</pre>
+                </div>
+            </div>
         {{/if}}
     </div>
 </script>

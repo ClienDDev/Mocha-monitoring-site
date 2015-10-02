@@ -1,3 +1,13 @@
 .list-group-item[onlick]{
     cursor: pointer;
 }
+
+.input_hover{
+    border: 1px solid #fff !important;
+    box-shadow: none !important;
+}
+
+.input_hover:hover{
+    border: 1px solid #ccc !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+}

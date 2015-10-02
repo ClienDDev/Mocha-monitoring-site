@@ -23,7 +23,7 @@ router.get('/tests', function(req, res){
         }
 
         res.json(return_json);
-    })
+    });
 });
 
 router.get('/tests/:name', function(req, res) {
