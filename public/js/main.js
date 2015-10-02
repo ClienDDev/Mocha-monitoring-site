@@ -27,8 +27,26 @@ function test_item_click(){
     });
 }
 
-function init(){
+function panel_click(){
+    $('.panel-heading').unbind('click').click(function(){
+        $(this).parent().find('.panel-body').slideToggle(100);
+    });
+}
 
+function search_init(){
+    $('#search')
+        .unbind('change')
+        .unbind('keydown')
+        .fastLiveFilter('.tests *:not(h3)', {
+            selector: 'li, .name'
+        })
+        .change(function(){
+            if($(this).val()=='')
+                $('.tests > *').slideDown(200);
+        });
+}
+
+function init(){
     $.get('/js/templates.html', function(html){
         $('body').append(html);
 
@@ -57,14 +75,17 @@ function init(){
                         }));
 
                         test_item_click();
+                        search_init();
 
                         console.log(json);
                     });
                 })(test);
             });
+
+            panel_click();
+            search_init();
         });
     });
-
 }
 
 $(function(){

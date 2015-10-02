@@ -1,5 +1,9 @@
-.list-group-item{
+.list-group-item, .panel-heading{
     cursor: pointer;
+}
+
+#search{
+    margin-bottom:10px;
 }
 
 .input_hover{
