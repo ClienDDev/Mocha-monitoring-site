@@ -43,6 +43,8 @@ function test_init(test){
     });
 
     $.get('/api/tests/' + test, function(res){
+        div.find('.refresh_test').removeAttr('disabled');
+
         try {
             var json = JSON.parse(res);
         }
@@ -65,7 +67,6 @@ function test_init(test){
 
         test_item_click();
         search_init();
-        div.find('.refresh_test').removeAttr('disabled');
 
         console.log(json);
     });
