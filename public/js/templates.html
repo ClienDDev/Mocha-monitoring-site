@@ -1,20 +1,22 @@
 <script id="test_template" type="text/x-handlebars-template">
-    <div class="panel panel-default test" data-name="{{name}}" >
-        <div class="panel-heading name">
-            <b>{{name}}</b>
-            <span title="Общее время выполнения" class="pull-right runtime"></span>
-        </div>
-        <div class="panel-body">
-            <div class="col-md-6" title="Успешные">
-                <div class="pass items_group"></div>
+    <div class="col-md-6">
+        <div class="panel panel-default test" data-name="{{name}}" >
+            <div class="panel-heading name">
+                <b>{{name}}</b>
+                <div class="pull-right">
+                    <span title="Общее время выполнения" class="runtime"></span> |
+                    <span title="Процент успешных тестов" class="percent"></span>
+                </div>
             </div>
-            <div class="col-md-6" title="Ошибки">
-                <div class="fail items_group"></div>
-            </div>
-            <div class="col-md-12">
-                <div class="btn btn-sm btn-primary pull-right refresh_test">
-                    <i class="fa fa-refresh"></i>
-                    Перезапустить тест
+            <div class="panel-body">
+                <div class="res">
+                    <i class="fa fa-spin fa-spinner fa-4x"></i>
+                </div>
+                <div class="col-md-12">
+                    <div class="btn btn-sm btn-primary pull-right refresh_test">
+                        <i class="fa fa-refresh"></i>
+                        Перезапустить тест
+                    </div>
                 </div>
             </div>
         </div>
@@ -25,7 +27,7 @@
     <div class="list-group">
         {{#if data}}
             {{#each data}}
-                <div class="list-group-item test_item {{#if ../success}} list-group-item-success {{else}} list-group-item-danger {{/if}}"
+                <div class="list-group-item test_item {{#if err.message}} list-group-item-danger {{else}} list-group-item-success {{/if}}"
                      {{#if err.message}}
                         data-error="{{err.message}}"
                         data-stack="{{err.stack}}"

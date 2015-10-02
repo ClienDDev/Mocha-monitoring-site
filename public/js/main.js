@@ -27,6 +27,41 @@ function test_item_click(){
     });
 }
 
+function update_status(){
+    var total = $('.test_item.list-group-item-success').length;
+    var error = $('.test_item.list-group-item-danger').length;
+    var success_percent = total * 100 / (total + error);
+
+    if(typeof success_percent !== 'number' || isNaN(success_percent))
+        success_percent = 0;
+
+    success_percent = success_percent.toFixed(2);
+
+    $('.all_status')
+        .removeClass('list-group-item-danger')
+        .removeClass('list-group-item-warning')
+        .removeClass('list-group-item-success');
+
+    $('.all_status i')
+        .removeClass('fa-check')
+        .removeClass('fa-exclamation-triangle');
+
+    if(success_percent > 90) {
+        $('.all_status i').addClass('fa-check');
+        $('.all_status').addClass('list-group-item-success');
+    }
+    else{
+        $('.all_status i').addClass('fa-exclamation-triangle');
+
+        if(success_percent > 80)
+            $('.all_status').addClass('list-group-item-warning');
+        else
+            $('.all_status').addClass('list-group-item-danger');
+    }
+
+    $('.all_status .percent').text(success_percent + '%');
+}
+
 
 function test_init(test){
     if($('.test[data-name="' + test + '"').length == 0)
@@ -34,8 +69,8 @@ function test_init(test){
 
     var div = $('.test[data-name="' + test + '"');
 
-    div.find('.runtime').html('<i class="fa fa-spin fa-spinner"></i>');
-    div.find('.fail, .pass').html('<i class="fa fa-spin fa-spinner fa-2x"></i>');
+    div.find('.runtime, .percent').html('<i class="fa fa-spin fa-spinner"></i>');
+    div.find('.res').html('<i class="fa fa-spin fa-spinner fa-2x"></i>');
     div.find('.refresh_test').attr('disabled', 'disabled');
 
     div.find('.refresh_test').unbind('click').click(function(){
@@ -43,6 +78,8 @@ function test_init(test){
     });
 
     $.get('/api/tests/' + test, function(res){
+        div.find('.refresh_test').removeAttr('disabled');
+
         try {
             var json = JSON.parse(res);
         }
@@ -54,18 +91,36 @@ function test_init(test){
         }
 
         div.find('.runtime').text(json.stats.duration + 'ms');
-        div.find('.pass').html(test_items_template({
-            data: json.passes,
-            success: true
-        }));
-        div.find('.fail').html(test_items_template({
-            data: json.failures,
-            success: false
-        }));
+        div.find('.res').html(test_items_template({ data: json.tests }));
+
+        var total = json.tests.length;
+        var error = json.failures.length;
+        var success_percent = total * 100 / (total + error);
+
+        if(typeof success_percent !== 'number' || isNaN(success_percent))
+            success_percent = 0;
+
+        success_percent = success_percent.toFixed(2);
+
+        div.find('.percent').text(success_percent + '%');
+
+        div
+            .removeClass('panel-success')
+            .removeClass('panel-warning')
+            .removeClass('panel-danger')
+            .removeClass('panel-default');
+
+        if(success_percent > 90)
+            div.addClass('panel-success');
+        else if(success_percent > 80)
+            div.addClass('panel-warning');
+        else
+            div.addClass('panel-danger');
 
         test_item_click();
         search_init();
-        div.find('.refresh_test').removeAttr('disabled');
+        update_status();
+        $(".tests").sortable();
 
         console.log(json);
     });
@@ -82,12 +137,10 @@ function search_init(){
     $('#search')
         .unbind('change')
         .unbind('keydown')
-        .fastLiveFilter('.tests *:not(h3)', {
-            selector: 'li, .name'
-        })
+        .fastLiveFilter('.tests')
         .change(function(){
             if($(this).val()=='')
-                $('.tests > *').slideDown(200);
+                $('.tests > *').show();
         });
 }
 

@@ -1,11 +1,67 @@
-{% extends "layout.html" %}
-{% block content %}
-    <input type="text" class="form-control input-lg" id="search" placeholder="Поиск">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monitoring</title>
+
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/base.css">
+</head>
+<body>
+
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header col-md-2">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Monitoring</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav col-md-4">
+                <li class="list-group-item all_status">
+                    <i class="fa fa-check"></i>
+                    Доступно
+                    <span class="percent"><i class="fa fa-spin fa-spinner"></i></span>
+                    сервисов
+                </li>
+            </ul>
+            <div class="search_box col-md-4">
+                <input type="text" class="form-control" placeholder="Поиск" id="search">
+            </div>
+            <ul class="nav navbar-nav pull-right col-md-2">
+                <li class="pull-right"><a href="http://clienddev.ru" target="_blank">ClienDDev team</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+
+<div class="container" style="padding-top: 60px;">
     <div class="tests">
         <i class="fa fa-spinner fa-spin fa-4x"></i>
     </div>
-{% endblock %}
+</div>
 
-{% block footer %}
-    <script src="js/main.js"></script>
-{% endblock %}
+<hr>
+<footer class="container">
+    &copy; 2015 <a href="http://clienddev.ru">ClienDDev team</a>
+</footer>
+
+
+<script src="libs/jquery/dist/jquery.min.js"></script>
+<script src="libs/jquery-ui/jquery-ui.min.js"></script>
+<script src="libs/jquery-fastlivefilter/jquery.fastLiveFilter.js"></script>
+<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="libs/handlebars/handlebars.min.js"></script>
+<script src="libs/bootbox.js/bootbox.js"></script>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>
