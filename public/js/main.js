@@ -61,8 +61,17 @@ function init(){
                     $('.tests').append(test_template({name: test}));
 
                     $.get('/api/tests/' + test, function(res){
-                        var json = JSON.parse(res);
                         var div = $('.test[data-name="' + test + '"');
+
+                        try {
+                            var json = JSON.parse(res);
+                        }
+                        catch(e){
+                            console.error(test, e);
+                            div.find('.runtime').text('Ошибка разбора JSON');
+                            div.find('.pass, .fail').text('');
+                            return;
+                        }
 
                         div.find('.runtime').text(json.stats.duration + 'ms');
                         div.find('.pass').html(test_items_template({

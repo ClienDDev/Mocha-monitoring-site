@@ -17,7 +17,7 @@ router.get('/tests', function(req, res){
 
         if(files && files.length > 0) {
             files.forEach(function (file) {
-                if (file != '..' && file != '.')
+                if (fs.lstatSync(global.config.tests_dir + '/' + file).isDirectory() === false && file != '..' && file != '.')
                     return_json.push(file.replace('.js', ''));
             });
         }
