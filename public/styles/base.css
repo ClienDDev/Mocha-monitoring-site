@@ -2,6 +2,10 @@
     cursor: pointer;
 }
 
+#search{
+    margin-bottom:10px;
+}
+
 .input_hover{
     border: 1px solid #fff !important;
     box-shadow: none !important;
