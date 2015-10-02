@@ -42,9 +42,17 @@ function update_status(){
         .removeClass('list-group-item-warning')
         .removeClass('list-group-item-success');
 
-    if(success_percent > 90)
+    $('.all_status i')
+        .removeClass('fa-check')
+        .removeClass('fa-exclamation-triangle');
+
+    if(success_percent > 90) {
+        $('.all_status i').addClass('fa-check');
         $('.all_status').addClass('list-group-item-success');
+    }
     else{
+        $('.all_status i').addClass('fa-exclamation-triangle');
+
         if(success_percent > 80)
             $('.all_status').addClass('list-group-item-warning');
         else
@@ -111,12 +119,10 @@ function search_init(){
     $('#search')
         .unbind('change')
         .unbind('keydown')
-        .fastLiveFilter('.tests *:not(h3)', {
-            selector: 'li, .name'
-        })
+        .fastLiveFilter('.tests')
         .change(function(){
             if($(this).val()=='')
-                $('.tests > *').slideDown(200);
+                $('.tests > *').show();
         });
 }
 
