@@ -10,7 +10,7 @@ function test_item_click(){
         var $this = $(this);
         var title = $this.find('.title').text();
         var duration = $this.find('.duration').text();
-        var is_fail = $this.closest('.items_group').hasClass('fail');
+        var is_fail = $this.closest('.test_item').hasClass('list-group-item-danger');
         var error = $this.data('error');
         var stack = $this.data('stack');
 
